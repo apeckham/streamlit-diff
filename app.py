@@ -20,11 +20,19 @@ if st.button("Find Differences"):
     ids_a = extract_ids(text_a)
     ids_b = extract_ids(text_b)
 
-    only_in_a = ids_a - ids_b
-    only_in_b = ids_b - ids_a
+    only_in_a = sorted(ids_a - ids_b)  # Convert to sorted list
+    only_in_b = sorted(ids_b - ids_a)  # Convert to sorted list
 
     st.subheader("In A but not in B:")
-    st.write(only_in_a)
+    if only_in_a:
+        for id in only_in_a:
+            st.markdown(f"* {id}")
+    else:
+        st.write("No unique IDs found")
 
     st.subheader("In B but not in A:")
-    st.write(only_in_b)
+    if only_in_b:
+        for id in only_in_b:
+            st.markdown(f"* {id}")
+    else:
+        st.write("No unique IDs found")
